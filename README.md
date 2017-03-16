@@ -1,2 +1,45 @@
-# s3_backup
-This docker container can be used to create an interval backup using tar and saves the file to an s3 bucket
+
+
+COMPRESS_OVERRIDE
+
+DECOMPRESS_OVERRIDE
+
+BACKUP_PATH              [REQUIRED]
+S3_BUCKET                [REQUIRED] 
+S3_PREFIX                [OPTIONAL]
+
+AWS_DEFAULT_REGION       [REQUIRED]
+AWS_ACCESS_KEY_ID        [REQUIRED IF NOT USING EC2 ROLES]
+AWS_SECRET_ACCESS_KEY    [REQUIRED IF NOT USING EC2 ROLES]
+
+
+[AWS CLI Getting Started Guide](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
+
+
+
+#### Interval Settings
+BACKUP_PERIOD_DAYS 1
+BACKUP_START_HOUR 0
+BACKUP_RANDOM_START_RANGE_MINUTES 60
+
+
+
+echo "   S3_BUCKET=$S3_BUCKET"
+echo "   BACKUP_PATH=$BACKUP_PATH"
+echo "   AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION"
+echo "   TIMEZONE=$(date +%Z)"
+echo "   RANDOM_INTERVAL_MIN=$RANDOM_INTERVAL_MIN"
+echo "   BACKUP_PERIOD_HOURS=$BACKUP_PERIOD_HOURS"
+echo "   BACKUP_START_DAY=$BACKUP_START_DAY  (Note: Not yet implemented)"
+echo "   BACKUP_START_HOUR=$BACKUP_START_HOUR"
+echo
+
+S3BACKUP CONFIGURATION:
+   S3_BUCKET=s3rkh
+   BACKUP_PATH=/my/path/
+   AWS_DEFAULT_REGION=us-west-2
+   TIMEZONE=PDT
+   RANDOM_INTERVAL_MIN=20
+   BACKUP_PERIOD_HOURS=2
+   BACKUP_START_DAY=0  (Note: Not yet implemented)
+   BACKUP_START_HOUR=0
